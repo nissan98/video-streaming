@@ -12,7 +12,7 @@ dotenv.config()
 const app = express()
 //middlewares 
 app.use(express.json({
-  limit:"16KB",
+  limit:"20KB",
 }))
 app.use(express.urlencoded({
   extended:true,
@@ -35,7 +35,7 @@ app.use("/",uploadVideo)
 
 const runServer = async()=>{
   await connectDb()
-  app.listen(6000)
+  app.listen(3000)
 }
 
 

@@ -1,5 +1,7 @@
+import appRootPath from "app-root-path"
 const cookieOptions = {
   http:true,
   secure:true
 }
-export {cookieOptions}
+const rootPath = appRootPath.path
+export {cookieOptions,rootPath}
