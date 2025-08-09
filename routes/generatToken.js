@@ -3,6 +3,7 @@ import { responseError } from "../utils/ResponseError.js";
 import jwt from "jsonwebtoken"
 import { user } from "../schemas/user.schema.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { validateAccessTokenn } from "../middlewares/access.token.validator.middleware.js";
 
 const router = Router()
 
@@ -32,6 +33,7 @@ router.get("/generateAccessToken",async (req,res)=>{
   }
   
 })
+
 
 
 
