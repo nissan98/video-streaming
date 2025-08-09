@@ -5,6 +5,7 @@ import { connectDb } from "./db/mongo.connection.js"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { responseError } from "./utils/ResponseError.js"
+import { tokenRouter } from "./routes/generatToken.js"
 dotenv.config()
 
 const app = express()
@@ -23,12 +24,13 @@ app.use((err,req,res,next)=>{
   responseError(res,500,err,"Something went wrong")
 })
 
-
+//Routes
+app.use("/",userRouter)
+app.use("/",tokenRouter)
 
 
 const runServer = async()=>{
   await connectDb()
-  app.use("/",userRouter)
   app.listen(6000)
 }
 
