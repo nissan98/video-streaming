@@ -46,6 +46,8 @@ const loginController = async (req,res)=>{
       email:email,
       username:username
   })
+
+  
   if (!doesUserExist){
       responseError(res,404,{},"user dosnot exists!")
       return
@@ -56,10 +58,21 @@ const loginController = async (req,res)=>{
       return
     }
 
+    
 
-    res.status(200).json(new ApiResponse(200,{},"login sucessfull"))
 
- }catch{
+    const {access_token,refresh_token} = generateTokens(doesUserExist)
+
+  const userData = await user.findById(doesUserExist.id)
+  .select("-password -refresh_token")
+
+    
+    res.status(200)
+      .cookie("refreshToken",refresh_token,cookieOptions)
+      .cookie("accessToken",access_token,cookieOptions)
+      .json(new ApiResponse(200,userData,"login sucessfull"))
+
+  }catch{
     responseError(res,500,{},"something went wrong")
   }
 }

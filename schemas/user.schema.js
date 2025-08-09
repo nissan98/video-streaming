@@ -34,6 +34,7 @@ userSchema.pre("save",function(e){
 })
 
 userSchema.methods.isPasswordSame =function(userPassword){
+ //console.log(this.password)
   const hashPass = sha256(userPassword)
   if (hashPass === this.password){
     return true
