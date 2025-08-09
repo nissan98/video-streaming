@@ -122,5 +122,6 @@ public/*/*
 public/*/*/*
 public/*/*/*/*
 yarn.lock
+videos/*
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
