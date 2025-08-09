@@ -21,10 +21,10 @@ const validateAccessTokenn=async(req,res,next)=>{
 
   }catch(e){
     if (e instanceof jwt.TokenExpiredError){
-      responseError(res,401,{},"refresh_token expired pleade login again")
+      responseError(res,401,{},"access_token expired pleade login again")
     }
     if (e instanceof jwt.JsonWebTokenError){
-      responseError(res,400,{},"refresh_token signature is not valid")
+      responseError(res,400,{},"access_token signature is not valid")
     }
   }
 }

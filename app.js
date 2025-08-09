@@ -6,6 +6,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import { responseError } from "./utils/ResponseError.js"
 import { tokenRouter } from "./routes/generatToken.js"
+import { uploadVideo } from "./routes/uploadVideo.js"
 dotenv.config()
 
 const app = express()
@@ -24,9 +25,12 @@ app.use((err,req,res,next)=>{
   responseError(res,500,err,"Something went wrong")
 })
 
+app.use(express.static("public"))
+
 //Routes
 app.use("/",userRouter)
 app.use("/",tokenRouter)
+app.use("/",uploadVideo)
 
 
 const runServer = async()=>{
