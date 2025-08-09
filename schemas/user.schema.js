@@ -33,6 +33,15 @@ userSchema.pre("save",function(e){
   e()
 })
 
+userSchema.methods.isPasswordSame =function(userPassword){
+  const hashPass = sha256(userPassword)
+  if (hashPass === this.password){
+    return true
+  }
+  return false
+}
+
+
 userSchema.methods.generateRefreshToken = function(){
   return jwt.sign({
     _id:this._id,

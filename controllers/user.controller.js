@@ -41,7 +41,6 @@ const sighupController = async(req,res,next)=>{
 
 const loginController = async (req,res)=>{
   const {username,email,password} = req.body
-  console.log(req.body)
   try{
   const doesUserExist = await user.findOne({
       email:email,
@@ -49,11 +48,19 @@ const loginController = async (req,res)=>{
   })
   if (!doesUserExist){
       responseError(res,404,{},"user dosnot exists!")
+      return
   }
-    res.send("login sucessfull")
+  const isPasswordSame = doesUserExist.isPasswordSame(password)
+    if (!isPasswordSame){
+      responseError(res,401,{},"wrong password")
+      return
+    }
 
-  }catch{
-    responseError(res,500,{},"Something went wrong")
+
+    res.status(200).json(new ApiResponse(200,{},"login sucessfull"))
+
+ }catch{
+    responseError(res,500,{},"something went wrong")
   }
 }
 
