@@ -17,7 +17,7 @@ const mergeVideo = (path, id) => {
         return value.split("blob-")[1].split(".")[0]
       })
       let tSuffix = suffix
-      if (tSuffix === ".x-matroska") {
+      if (tSuffix == ".x-matroska") {
         tSuffix = ".mkv"
       }
 
@@ -41,7 +41,7 @@ const mergeVideo = (path, id) => {
 
       resolve(path)
     } catch (e) {
-      reject("file not uploaded pleasd upload again")
+      reject("file not uploaded please upload again")
     }
 
   })

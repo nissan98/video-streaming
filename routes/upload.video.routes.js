@@ -31,7 +31,7 @@ route.post("/uploadVideo", validateAccessTokenn, uploader.single("file"), async 
     const { end } = req.body
     const { _id } = req.userData
     if (!req.isFileUploaded) {
-      responseError(res, 415, {}, "unsupported media type")
+      responseError(res, 415, {}, "unsupported media file type")
       return
     }
 

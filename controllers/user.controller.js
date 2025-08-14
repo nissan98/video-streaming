@@ -30,10 +30,10 @@ const sighupController = async (req, res, next) => {
       )
   } catch (e) {
     if (e instanceof mongo.MongoServerError) {
-      responseError(res, 409, {}, "username or email is already exists")
+      responseError(res, 409, {}, "username or email already exists")
       return
     }
-    responseError(res, 500, {}, "Something Wrong With Our Server")
+    responseError(res, 500, {}, "something went wrong")
   }
 
 
@@ -49,7 +49,7 @@ const loginController = async (req, res) => {
 
 
     if (!doesUserExist) {
-      responseError(res, 404, {}, "user dosnot exists!")
+      responseError(res, 404, {}, "user dosnot exists")
       return
     }
     const isPasswordSame = doesUserExist.isPasswordSame(password)

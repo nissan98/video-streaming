@@ -1,4 +1,5 @@
 import { videoModel } from "../schemas/video.schema.js"
+import { ApiResponse } from "../utils/api.response.utils.js"
 
 const getVideos = async (req, res) => {
   const { _id } = req.userData
@@ -7,7 +8,9 @@ const getVideos = async (req, res) => {
       "$match": { "createdBy": _id }
     }
   ])
-  res.json(videos)
+  res.json(
+    new ApiResponse(200,videos,"video fetching succesfull")
+  )
 }
 
 export {
