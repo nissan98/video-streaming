@@ -18,6 +18,8 @@ router.post("/signup",validateUserSignUp,sighupController)
 router.post("/login",validateUserLogin,loginController)
 
 router.get("/getVideos",validateAccessTokenn,getVideos)
+
+
 export {
   router as userRouter
 }

@@ -12,12 +12,13 @@ router.get("/generateAccessToken",async (req,res)=>{
   try{  
     const {authorization} = req.headers
     const authToken = authorization.split("Bearer ")[1]
-    const decode = jwt.verify(authToken,process.env.JWT_SECRET)
+    const decode = jwt.verify(authToken,process.env.REFRESH_TOKEN_SECRET)
     const id = decode._id
     const userData = await user.findById(id)
 
     if (!(authToken === userData.refresh_token)){
       responseError(res,401,{},"this refresh_token dosnt belong to this user")
+      return
     }
     //cookie
     res.cookie("accessToken",userData.generateAccessToken())
@@ -28,9 +29,11 @@ router.get("/generateAccessToken",async (req,res)=>{
   }catch(e){
     if (e instanceof jwt.TokenExpiredError){
       responseError(res,401,{},"refresh_token expired pleade login again")
+      return
     }
     if (e instanceof jwt.JsonWebTokenError){
       responseError(res,400,{},"refresh_token signature is not valid")
+      return
     }
     responseError(res,500,{},"something went wrong")
   }
