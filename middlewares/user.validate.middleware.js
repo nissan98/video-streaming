@@ -1,5 +1,5 @@
 import z from "zod"
-import { responseError } from "../utils/ResponseError.js"
+import { responseError } from "../utils/response.error.utils.js"
 import { userSchema,loginSchema} from "../zodschemas/user.zod.schema.js"
 
 const validateUserSignUp = (req,res,next)=>{

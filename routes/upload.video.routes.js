@@ -1,14 +1,14 @@
 import { Router } from "express"
 import multer from "multer"
-import { storage } from "../utils/multerConfiguration.js"
+import { storage } from "../utils/multer.configuration.utils.js"
 import { validateAccessTokenn } from "../middlewares/access.token.validator.middleware.js"
-import { responseError } from "../utils/ResponseError.js"
-import { ApiResponse } from "../utils/ApiResponse.js"
-import { rootPath } from "../utils/constants.js"
+import { responseError } from "../utils/response.error.utils.js"
+import { ApiResponse } from "../utils/api.response.utils.js"
+import { rootPath } from "../utils/constants.utils.js"
 import path from "path"
-import { mergeVideo } from "../utils/videoMerger.js"
+import { mergeVideo } from "../utils/video.merger.utils.js"
 import { videoModel } from "../schemas/video.schema.js"
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 const route = Router()
 const uploader = multer(
   {

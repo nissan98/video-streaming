@@ -1,8 +1,8 @@
-import { ApiResponse } from "../utils/ApiResponse.js"
-import { responseError } from "../utils/ResponseError.js"
+import { ApiResponse } from "../utils/api.response.utils.js"
+import { responseError } from "../utils/response.error.utils.js"
 import { user } from "../schemas/user.schema.js"
-import { cookieOptions } from "../utils/constants.js"
-import { generateTokens } from "../utils/generateTokens.js"
+import { cookieOptions } from "../utils/constants.utils.js"
+import { generateTokens } from "../utils/generate.tokens.utils.js"
 import { mongo,} from "mongoose"
 
 const sighupController = async(req,res,next)=>{

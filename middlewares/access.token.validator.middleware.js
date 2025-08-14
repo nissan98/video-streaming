@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import { user } from "../schemas/user.schema.js"
-import { responseError } from "../utils/ResponseError.js"
-import { ApiResponse } from "../utils/ApiResponse.js"
+import { responseError } from "../utils/response.error.utils.js"
+import { ApiResponse } from "../utils/api.response.utils.js"
 
 const validateAccessTokenn=async(req,res,next)=>{
   try{

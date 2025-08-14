@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { responseError } from "../utils/ResponseError.js";
+import { responseError } from "../utils/response.error.utils.js";
 import jwt from "jsonwebtoken"
 import { user } from "../schemas/user.schema.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiResponse } from "../utils/api.response.utils.js";
 
 
 
