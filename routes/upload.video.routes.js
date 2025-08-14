@@ -34,7 +34,8 @@ route.post("/uploadVideo", validateAccessTokenn, uploader.single("file"), async 
       responseError(res, 415, {}, "unsupported media type")
       return
     }
-    if (end === "false") {
+
+    if (end == "false") {
       res.status(202)
         .json(new ApiResponse(202, {}, `chunk ${req.body.currentchunk} upload sucessfully`))
       return
@@ -43,14 +44,21 @@ route.post("/uploadVideo", validateAccessTokenn, uploader.single("file"), async 
     const absolutePath = path.join(rootPath, destination)
     await mergeVideo(absolutePath, req.userData.id)
     const videoPath = destination.replace("public/", "") + "video.m3u8"
-    const video = await videoModel.create({
-      title: "hello worlf",
-      description: "hwllo world",
+    const { title, description } = req.body
+    if (!title) {
+      responseError(res, 400, {}, "title is required")
+      return
+    }
+
+    await videoModel.create({
+      title: title,
+      description: description || "",
       videoPath: videoPath,
       createdBy: new mongoose.Types.ObjectId(_id)
     })
 
     res.status(200).json(new ApiResponse(200, {}, "file uploaded sucessfully"))
+
   } catch {
     responseError(res, 500, {}, "something went wrong")
   }
