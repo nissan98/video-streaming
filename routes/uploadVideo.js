@@ -7,6 +7,8 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 import { rootPath } from "../utils/constants.js"
 import path from "path"
 import { mergeVideo } from "../utils/videoMerger.js"
+import { videoModel } from "../schemas/video.schema.js"
+import mongoose, { mongo } from "mongoose"
 const route = Router()
 const uploader = multer(
   {
@@ -25,8 +27,9 @@ const uploader = multer(
 
 
 route.post("/uploadVideo",validateAccessTokenn,uploader.single("file"),async(req,res)=>{
-  try{
+  //try{
     const {end} = req.body
+    const {_id} = req.userData 
    if(!req.isFileUploaded){
      responseError(res,415,{},"unsupported media type")
      return
@@ -38,11 +41,19 @@ route.post("/uploadVideo",validateAccessTokenn,uploader.single("file"),async(req
     }
     const {destination} = req.file
     const absolutePath = path.join(rootPath,destination)
-    const result = await mergeVideo(absolutePath,req.userData.id)
+    await mergeVideo(absolutePath,req.userData.id)
+    const videoPath = destination.replace("public/","")+"video.m3u8"
+    const video = await videoModel.create({
+      title:"hello worlf",
+      description:"hwllo world",
+      videoPath:videoPath,
+      createdBy:new mongoose.Types.ObjectId(_id)
+    })
+    
     res.status(200).json(new ApiResponse(200,{},"file uploaded sucessfully"))
-  }catch(e){
+  /*}catch(e){
     responseError(res,500,{},"something went wrong")
-  }
+  }*/
 })
 export {
   route as uploadVideo

@@ -15,10 +15,6 @@ const userSchema = Schema({
     index:true,
     required:true,
   },
-  videos:[{
-    type:Schema.Types.ObjectId,
-    ref:"videos"
-  }],
   refresh_token:{
     type:String,
     default:null
