@@ -1,7 +1,7 @@
 import fs from "fs"
-import { rootPath } from "./constants.utils.js"
-import p from "path"
 import { convertVideoToStreams } from "./hls.converter.utils.js"
+import { extractVideoMetaData } from "./video.file.duration.utils.js"
+
 const mergeVideo = (path, id) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -36,10 +36,15 @@ const mergeVideo = (path, id) => {
       })
       fs.closeSync(writeStream)
       // fs.rmSync(path,{recursive:true})
-      await convertVideoToStreams(output, path)
+      const metaData = await extractVideoMetaData(output)
+   
+      await convertVideoToStreams(output, path,metaData)
       fs.unlinkSync(output)
-
-      resolve(path)
+        if (!metaData || !path){
+        reject("something went wrong while processing the video")
+      }
+      
+      resolve(metaData) 
     } catch (e) {
       reject("file not uploaded please upload again")
     }

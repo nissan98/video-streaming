@@ -16,8 +16,12 @@ const videoSchema = Schema({
   createdBy:{
     type:Schema.Types.ObjectId,
     ref:"User"
+  },
+  size:Number,
+  duration:{
+    type:Number,
+    required:true
   }
-
 },{timestamps:true})
 
 const videoModel = model("Video",videoSchema)

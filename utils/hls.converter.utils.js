@@ -1,6 +1,6 @@
 import ffmpeg from "fluent-ffmpeg"
 
-const convertVideoToStreams = (path, outputPath) => {
+const convertVideoToStreams = (path, outputPath,metadata) => {
   //fluent-ffmpeg is depriciated this is a personal project so its fine for now 
   return new Promise((res, rej) => {
     ffmpeg(path)
@@ -13,13 +13,12 @@ const convertVideoToStreams = (path, outputPath) => {
       ])
       .output(outputPath + "video.m3u8")
       .on('end', () => {
-        res("file upload done")
+        res(metadata)
       })
       .on("error", (e) => {
-        rej("")
+        rej("something went wrong while converting video to streams")
       })
       .run()
-
   })
 }
 
