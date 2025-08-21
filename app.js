@@ -1,12 +1,12 @@
 import express from "express"
-import { userRouter } from "./routes/user.router.routes.js"
+import { userRouter } from "./routes/user.router.route.js"
 import dotenv from "dotenv"
 import { connectDb } from "./db/mongo.connection.js"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { responseError } from "./utils/response.error.utils.js"
 import { tokenRouter } from "./routes/generate.token.route.js"
-import { uploadVideo } from "./routes/upload.video.routes.js"
+import { uploadVideo } from "./routes/upload.video.route.js"
 dotenv.config()
 
 const app = express()

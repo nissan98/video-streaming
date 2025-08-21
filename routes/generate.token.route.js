@@ -20,10 +20,9 @@ router.get("/generateAccessToken",async (req,res)=>{
       responseError(res,401,{},"refresh_token dosnt belong to this user")
       return
     }
-    //cookie
-    res.cookie("accessToken",userData.generateAccessToken())
+   
 
-    res.status(200)
+    res.cookie("accessToken",userData.generateAccessToken()).status(200)
     .json(new ApiResponse(200,{},"access_token genetated sucessfully"))
 
   }catch(e){
