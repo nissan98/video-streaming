@@ -39,7 +39,6 @@ const mergeVideo = (path, id) => {
       const metaData = await extractVideoMetaData(output)
    
       await convertVideoToStreams(output, path,metaData)
-      fs.unlinkSync(output)
         if (!metaData || !path){
         reject("something went wrong while processing the video")
       }
