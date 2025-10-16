@@ -10,6 +10,7 @@ import { mergeVideo } from "../utils/video.merger.utils.js"
 import { videoModel } from "../schemas/video.schema.js"
 import mongoose from "mongoose"
 
+
 const route = Router()
 const uploader = multer(
   {
@@ -44,7 +45,7 @@ route.post("/uploadVideo", validateAccessTokenn, uploader.single("file"), async 
     const { destination } = req.file
     const absolutePath = path.join(rootPath, destination)
     const metaData = await mergeVideo(absolutePath, req.userData.id)
-    const videoPath = destination.replace("public/", "") + "video.m3u8"
+    const videoPath = destination.replace("public/", "") + "videotimestamps.config"
     const { title, description } = req.body
     if (!title) {
       responseError(res, 400, {}, "title is required")
@@ -54,6 +55,7 @@ route.post("/uploadVideo", validateAccessTokenn, uploader.single("file"), async 
       responseError(500, {}, "something went wrong while extracting metedata")
     }
     const {size,duration} = metaData?.format
+
 
 
     await videoModel.create({
