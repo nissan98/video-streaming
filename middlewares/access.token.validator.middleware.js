@@ -30,7 +30,7 @@ const validateAccessTokenn=async(req,res,next)=>{
       responseError(res,400,{},"access_token signature is not valid")
       return
     }
-    ApiResponse(500,{},"something went wrong")
+    res.json(new ApiResponse(500,{},"please provide a valide access_token"));
 
   }
 }
